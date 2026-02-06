@@ -132,7 +132,7 @@ app.post("/alunos", (req, res) => {
     if(!nome){
         return res.status(400).json({msg: "Por gentileza digite o Nome"})
     }
-    const id = listaAlunos.length > 0 ? listaAlunos[listarAlunos.length -1].id +1 : 1
+    const id = listaAlunos.length > 0 ? listaAlunos[listaAlunos.length -1].id +1 : 1
     const aluno = {id, nome}
     listaAlunos.push(aluno)
     res.status(201).json({msg: "Aluno Cadastrado com Sucesso!"})
