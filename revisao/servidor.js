@@ -127,30 +127,39 @@ app.delete("/alunos/", (req, res) => {
 
 
 app.post("/alunos", (req, res) => {
-    const id = req.body.id;
-    const nome = req.body.nome;
-
-    const novoAluno = {id , nome};
-
-    const idEncontrado = listaAlunos.findIndex(a => a.id == Number(id))
-
-    if (!nome)
-    {
-        return res.status(404).json({msg: "Por gentileza colocar o nome"})
+    console.log(req.body)
+    const { nome } = req.body
+    if(!nome){
+        return res.status(400).json({msg: "Por gentileza digite o Nome"})
     }
-    if ( id < 0)
-    {
-        return res.status(400).json({msg: "Por favor coloque um id de número positivo"})
-    }
-    if (idEncontrado === -1)
-    {
-        listaAlunos.push(novoAluno);
-        console.log(idEncontrado)
+    const id = listaAlunos.length > 0 ? listaAlunos[listarAlunos.length -1].id +1 : 1
+    const aluno = {id, nome}
+    listaAlunos.push(aluno)
+    res.status(201).json({msg: "Aluno Cadastrado com Sucesso!"})
+    // const id = req.body.id;
+    // const nome = req.body.nome;
 
-        return res.status(200).json({msg: "Aluno criado com sucesso"})
-    }
+    // const novoAluno = {id , nome};
 
-    return res.status(400).json({msg: "Aluno já existe"})
+    // const idEncontrado = listaAlunos.findIndex(a => a.id == Number(id))
+
+    // if (!nome)
+    // {
+    //     return res.status(404).json({msg: "Por gentileza colocar o nome"})
+    // }
+    // if ( id < 0)
+    // {
+    //     return res.status(400).json({msg: "Por favor coloque um id de número positivo"})
+    // }
+    // if (idEncontrado === -1)
+    // {
+    //     listaAlunos.push(novoAluno);
+    //     console.log(idEncontrado)
+
+    //     return res.status(200).json({msg: "Aluno criado com sucesso"})
+    // }
+
+    // return res.status(400).json({msg: "Aluno já existe"})
     
 })
 
